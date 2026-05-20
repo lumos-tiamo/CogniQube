@@ -18,11 +18,11 @@ export const conversationApi = {
     return request.get<Conversation>(`/conversations/${id}`)
   },
 
-  updateStatus(id: string, status: Conversation['status'], remark?: string) {
+  updateStatus(id: string, status: string, remark?: string) {
     return request.put(`/conversations/${id}/status`, { status, remark })
   },
 
-  batchUpdate(ids: string[], status: Conversation['status']) {
+  batchUpdate(ids: string[], status: string) {
     return request.put('/conversations/batch', { ids, status })
   },
 }

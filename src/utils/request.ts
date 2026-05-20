@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import type { ApiResponse } from '@/types'
 
@@ -12,7 +12,7 @@ const instance: AxiosInstance = axios.create({
 })
 
 instance.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     return config
   },
   error => {
@@ -29,7 +29,7 @@ instance.interceptors.response.use(
       return Promise.reject(new Error(message || '请求失败'))
     }
 
-    return data
+    return data as any
   },
   error => {
     const message = error.response?.data?.message || error.message || '网络错误'

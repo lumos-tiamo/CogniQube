@@ -101,11 +101,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useAIEngineStore } from '@/stores/ai-engine'
-import { aiApi } from '@/api/ai'
 import { conversationApi } from '@/api'
 import { saveAIResult, getAllAIResults, clearAllAIResults } from '@/utils/db'
 import pLimit from 'p-limit'
-import type { AIInspectionResult, Conversation } from '@/types'
+import type { AIInspectionResult } from '@/types'
 
 const aiEngineStore = useAIEngineStore()
 

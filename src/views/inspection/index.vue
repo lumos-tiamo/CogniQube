@@ -161,13 +161,10 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { useInspectionStore } from '@/stores/inspection'
 import { conversationApi } from '@/api'
 import { formatDuration } from '@/utils'
 import { exportToExcel } from '@/utils/export'
 import type { Conversation } from '@/types'
-
-const inspectionStore = useInspectionStore()
 
 const loading = ref(false)
 const tableData = ref<Conversation[]>([])
@@ -176,10 +173,14 @@ const detailVisible = ref(false)
 const reviewVisible = ref(false)
 const currentConversation = ref<Conversation | null>(null)
 
-const filterForm = reactive({
-  dateRange: undefined as [string, string] | undefined,
-  status: [] as string[],
-  scoreRange: [0, 100] as [number, number],
+const filterForm = reactive<{
+  dateRange: [string, string] | undefined
+  status: string[]
+  scoreRange: [number, number]
+}>({
+  dateRange: undefined,
+  status: [],
+  scoreRange: [0, 100],
 })
 
 const reviewForm = reactive({
@@ -226,7 +227,7 @@ const loadData = async () => {
       ...filterForm,
       ...pagination,
     }
-    const data = await conversationApi.getList(params)
+    const data = await conversationApi.getList(params) as any
     tableData.value = data
   } catch (error) {
     ElMessage.error('加载数据失败')
@@ -289,7 +290,7 @@ const handleExport = () => {
 
 const handleViewDetail = async (row: Conversation) => {
   try {
-    const data = await conversationApi.getById(row.id)
+    const data = await conversationApi.getById(row.id) as any
     currentConversation.value = data
     detailVisible.value = true
   } catch (error) {

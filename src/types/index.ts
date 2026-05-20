@@ -73,9 +73,9 @@ export interface InspectionRule {
 
 // 筛选条件
 export interface FilterOptions {
-  dateRange?: [string, string]
+  dateRange?: [string, string] | undefined
   agentIds?: string[]
-  status?: Conversation['status'][]
+  status?: string[]
   scoreRange?: [number, number]
   regions?: string[]
   tags?: string[]

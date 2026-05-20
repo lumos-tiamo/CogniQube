@@ -83,7 +83,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import KPICard from '@/components/common/KPICard.vue'
 import BaseChart from '@/components/charts/BaseChart.vue'
 import type { EChartsOption } from 'echarts'
 
